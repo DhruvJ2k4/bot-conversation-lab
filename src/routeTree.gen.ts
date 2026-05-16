@@ -9,38 +9,292 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated.settings'
+import { Route as AuthenticatedTestCasesIndexRouteImport } from './routes/_authenticated.test-cases.index'
+import { Route as AuthenticatedSeedConversationsIndexRouteImport } from './routes/_authenticated.seed-conversations.index'
+import { Route as AuthenticatedRunsIndexRouteImport } from './routes/_authenticated.runs.index'
+import { Route as AuthenticatedPromptsIndexRouteImport } from './routes/_authenticated.prompts.index'
+import { Route as AuthenticatedPersonasIndexRouteImport } from './routes/_authenticated.personas.index'
+import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_authenticated.lead-prompts.index'
+import { Route as AuthenticatedJudgePromptsIndexRouteImport } from './routes/_authenticated.judge-prompts.index'
+import { Route as AuthenticatedTestCasesIdRouteImport } from './routes/_authenticated.test-cases.$id'
+import { Route as AuthenticatedSeedConversationsIdRouteImport } from './routes/_authenticated.seed-conversations.$id'
+import { Route as AuthenticatedRunsNewRouteImport } from './routes/_authenticated.runs.new'
+import { Route as AuthenticatedRunsIdRouteImport } from './routes/_authenticated.runs.$id'
+import { Route as AuthenticatedPromptsIdRouteImport } from './routes/_authenticated.prompts.$id'
+import { Route as AuthenticatedPersonasIdRouteImport } from './routes/_authenticated.personas.$id'
+import { Route as AuthenticatedLeadPromptsIdRouteImport } from './routes/_authenticated.lead-prompts.$id'
+import { Route as AuthenticatedJudgePromptsIdRouteImport } from './routes/_authenticated.judge-prompts.$id'
+import { Route as AuthenticatedRunsIdConversationsConvIdRouteImport } from './routes/_authenticated.runs.$id.conversations.$convId'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedTestCasesIndexRoute =
+  AuthenticatedTestCasesIndexRouteImport.update({
+    id: '/test-cases/',
+    path: '/test-cases/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSeedConversationsIndexRoute =
+  AuthenticatedSeedConversationsIndexRouteImport.update({
+    id: '/seed-conversations/',
+    path: '/seed-conversations/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRunsIndexRoute = AuthenticatedRunsIndexRouteImport.update({
+  id: '/runs/',
+  path: '/runs/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPromptsIndexRoute =
+  AuthenticatedPromptsIndexRouteImport.update({
+    id: '/prompts/',
+    path: '/prompts/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedPersonasIndexRoute =
+  AuthenticatedPersonasIndexRouteImport.update({
+    id: '/personas/',
+    path: '/personas/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedLeadPromptsIndexRoute =
+  AuthenticatedLeadPromptsIndexRouteImport.update({
+    id: '/lead-prompts/',
+    path: '/lead-prompts/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedJudgePromptsIndexRoute =
+  AuthenticatedJudgePromptsIndexRouteImport.update({
+    id: '/judge-prompts/',
+    path: '/judge-prompts/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTestCasesIdRoute =
+  AuthenticatedTestCasesIdRouteImport.update({
+    id: '/test-cases/$id',
+    path: '/test-cases/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSeedConversationsIdRoute =
+  AuthenticatedSeedConversationsIdRouteImport.update({
+    id: '/seed-conversations/$id',
+    path: '/seed-conversations/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRunsNewRoute = AuthenticatedRunsNewRouteImport.update({
+  id: '/runs/new',
+  path: '/runs/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRunsIdRoute = AuthenticatedRunsIdRouteImport.update({
+  id: '/runs/$id',
+  path: '/runs/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPromptsIdRoute = AuthenticatedPromptsIdRouteImport.update({
+  id: '/prompts/$id',
+  path: '/prompts/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPersonasIdRoute = AuthenticatedPersonasIdRouteImport.update({
+  id: '/personas/$id',
+  path: '/personas/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedLeadPromptsIdRoute =
+  AuthenticatedLeadPromptsIdRouteImport.update({
+    id: '/lead-prompts/$id',
+    path: '/lead-prompts/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedJudgePromptsIdRoute =
+  AuthenticatedJudgePromptsIdRouteImport.update({
+    id: '/judge-prompts/$id',
+    path: '/judge-prompts/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedRunsIdConversationsConvIdRoute =
+  AuthenticatedRunsIdConversationsConvIdRouteImport.update({
+    id: '/conversations/$convId',
+    path: '/conversations/$convId',
+    getParentRoute: () => AuthenticatedRunsIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
+  '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
+  '/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/runs/$id': typeof AuthenticatedRunsIdRouteWithChildren
+  '/runs/new': typeof AuthenticatedRunsNewRoute
+  '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
+  '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
+  '/judge-prompts/': typeof AuthenticatedJudgePromptsIndexRoute
+  '/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
+  '/personas/': typeof AuthenticatedPersonasIndexRoute
+  '/prompts/': typeof AuthenticatedPromptsIndexRoute
+  '/runs/': typeof AuthenticatedRunsIndexRoute
+  '/seed-conversations/': typeof AuthenticatedSeedConversationsIndexRoute
+  '/test-cases/': typeof AuthenticatedTestCasesIndexRoute
+  '/runs/$id/conversations/$convId': typeof AuthenticatedRunsIdConversationsConvIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
+  '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
+  '/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/runs/$id': typeof AuthenticatedRunsIdRouteWithChildren
+  '/runs/new': typeof AuthenticatedRunsNewRoute
+  '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
+  '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
+  '/judge-prompts': typeof AuthenticatedJudgePromptsIndexRoute
+  '/lead-prompts': typeof AuthenticatedLeadPromptsIndexRoute
+  '/personas': typeof AuthenticatedPersonasIndexRoute
+  '/prompts': typeof AuthenticatedPromptsIndexRoute
+  '/runs': typeof AuthenticatedRunsIndexRoute
+  '/seed-conversations': typeof AuthenticatedSeedConversationsIndexRoute
+  '/test-cases': typeof AuthenticatedTestCasesIndexRoute
+  '/runs/$id/conversations/$convId': typeof AuthenticatedRunsIdConversationsConvIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
+  '/_authenticated/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
+  '/_authenticated/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/_authenticated/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/_authenticated/runs/$id': typeof AuthenticatedRunsIdRouteWithChildren
+  '/_authenticated/runs/new': typeof AuthenticatedRunsNewRoute
+  '/_authenticated/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
+  '/_authenticated/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
+  '/_authenticated/judge-prompts/': typeof AuthenticatedJudgePromptsIndexRoute
+  '/_authenticated/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
+  '/_authenticated/personas/': typeof AuthenticatedPersonasIndexRoute
+  '/_authenticated/prompts/': typeof AuthenticatedPromptsIndexRoute
+  '/_authenticated/runs/': typeof AuthenticatedRunsIndexRoute
+  '/_authenticated/seed-conversations/': typeof AuthenticatedSeedConversationsIndexRoute
+  '/_authenticated/test-cases/': typeof AuthenticatedTestCasesIndexRoute
+  '/_authenticated/runs/$id/conversations/$convId': typeof AuthenticatedRunsIdConversationsConvIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/settings'
+    | '/judge-prompts/$id'
+    | '/lead-prompts/$id'
+    | '/personas/$id'
+    | '/prompts/$id'
+    | '/runs/$id'
+    | '/runs/new'
+    | '/seed-conversations/$id'
+    | '/test-cases/$id'
+    | '/judge-prompts/'
+    | '/lead-prompts/'
+    | '/personas/'
+    | '/prompts/'
+    | '/runs/'
+    | '/seed-conversations/'
+    | '/test-cases/'
+    | '/runs/$id/conversations/$convId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/settings'
+    | '/judge-prompts/$id'
+    | '/lead-prompts/$id'
+    | '/personas/$id'
+    | '/prompts/$id'
+    | '/runs/$id'
+    | '/runs/new'
+    | '/seed-conversations/$id'
+    | '/test-cases/$id'
+    | '/judge-prompts'
+    | '/lead-prompts'
+    | '/personas'
+    | '/prompts'
+    | '/runs'
+    | '/seed-conversations'
+    | '/test-cases'
+    | '/runs/$id/conversations/$convId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/login'
+    | '/_authenticated/settings'
+    | '/_authenticated/judge-prompts/$id'
+    | '/_authenticated/lead-prompts/$id'
+    | '/_authenticated/personas/$id'
+    | '/_authenticated/prompts/$id'
+    | '/_authenticated/runs/$id'
+    | '/_authenticated/runs/new'
+    | '/_authenticated/seed-conversations/$id'
+    | '/_authenticated/test-cases/$id'
+    | '/_authenticated/judge-prompts/'
+    | '/_authenticated/lead-prompts/'
+    | '/_authenticated/personas/'
+    | '/_authenticated/prompts/'
+    | '/_authenticated/runs/'
+    | '/_authenticated/seed-conversations/'
+    | '/_authenticated/test-cases/'
+    | '/_authenticated/runs/$id/conversations/$convId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +302,188 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/test-cases/': {
+      id: '/_authenticated/test-cases/'
+      path: '/test-cases'
+      fullPath: '/test-cases/'
+      preLoaderRoute: typeof AuthenticatedTestCasesIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/seed-conversations/': {
+      id: '/_authenticated/seed-conversations/'
+      path: '/seed-conversations'
+      fullPath: '/seed-conversations/'
+      preLoaderRoute: typeof AuthenticatedSeedConversationsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/runs/': {
+      id: '/_authenticated/runs/'
+      path: '/runs'
+      fullPath: '/runs/'
+      preLoaderRoute: typeof AuthenticatedRunsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/prompts/': {
+      id: '/_authenticated/prompts/'
+      path: '/prompts'
+      fullPath: '/prompts/'
+      preLoaderRoute: typeof AuthenticatedPromptsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/personas/': {
+      id: '/_authenticated/personas/'
+      path: '/personas'
+      fullPath: '/personas/'
+      preLoaderRoute: typeof AuthenticatedPersonasIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/lead-prompts/': {
+      id: '/_authenticated/lead-prompts/'
+      path: '/lead-prompts'
+      fullPath: '/lead-prompts/'
+      preLoaderRoute: typeof AuthenticatedLeadPromptsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/judge-prompts/': {
+      id: '/_authenticated/judge-prompts/'
+      path: '/judge-prompts'
+      fullPath: '/judge-prompts/'
+      preLoaderRoute: typeof AuthenticatedJudgePromptsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/test-cases/$id': {
+      id: '/_authenticated/test-cases/$id'
+      path: '/test-cases/$id'
+      fullPath: '/test-cases/$id'
+      preLoaderRoute: typeof AuthenticatedTestCasesIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/seed-conversations/$id': {
+      id: '/_authenticated/seed-conversations/$id'
+      path: '/seed-conversations/$id'
+      fullPath: '/seed-conversations/$id'
+      preLoaderRoute: typeof AuthenticatedSeedConversationsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/runs/new': {
+      id: '/_authenticated/runs/new'
+      path: '/runs/new'
+      fullPath: '/runs/new'
+      preLoaderRoute: typeof AuthenticatedRunsNewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/runs/$id': {
+      id: '/_authenticated/runs/$id'
+      path: '/runs/$id'
+      fullPath: '/runs/$id'
+      preLoaderRoute: typeof AuthenticatedRunsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/prompts/$id': {
+      id: '/_authenticated/prompts/$id'
+      path: '/prompts/$id'
+      fullPath: '/prompts/$id'
+      preLoaderRoute: typeof AuthenticatedPromptsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/personas/$id': {
+      id: '/_authenticated/personas/$id'
+      path: '/personas/$id'
+      fullPath: '/personas/$id'
+      preLoaderRoute: typeof AuthenticatedPersonasIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/lead-prompts/$id': {
+      id: '/_authenticated/lead-prompts/$id'
+      path: '/lead-prompts/$id'
+      fullPath: '/lead-prompts/$id'
+      preLoaderRoute: typeof AuthenticatedLeadPromptsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/judge-prompts/$id': {
+      id: '/_authenticated/judge-prompts/$id'
+      path: '/judge-prompts/$id'
+      fullPath: '/judge-prompts/$id'
+      preLoaderRoute: typeof AuthenticatedJudgePromptsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/runs/$id/conversations/$convId': {
+      id: '/_authenticated/runs/$id/conversations/$convId'
+      path: '/conversations/$convId'
+      fullPath: '/runs/$id/conversations/$convId'
+      preLoaderRoute: typeof AuthenticatedRunsIdConversationsConvIdRouteImport
+      parentRoute: typeof AuthenticatedRunsIdRoute
+    }
   }
 }
 
+interface AuthenticatedRunsIdRouteChildren {
+  AuthenticatedRunsIdConversationsConvIdRoute: typeof AuthenticatedRunsIdConversationsConvIdRoute
+}
+
+const AuthenticatedRunsIdRouteChildren: AuthenticatedRunsIdRouteChildren = {
+  AuthenticatedRunsIdConversationsConvIdRoute:
+    AuthenticatedRunsIdConversationsConvIdRoute,
+}
+
+const AuthenticatedRunsIdRouteWithChildren =
+  AuthenticatedRunsIdRoute._addFileChildren(AuthenticatedRunsIdRouteChildren)
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedJudgePromptsIdRoute: typeof AuthenticatedJudgePromptsIdRoute
+  AuthenticatedLeadPromptsIdRoute: typeof AuthenticatedLeadPromptsIdRoute
+  AuthenticatedPersonasIdRoute: typeof AuthenticatedPersonasIdRoute
+  AuthenticatedPromptsIdRoute: typeof AuthenticatedPromptsIdRoute
+  AuthenticatedRunsIdRoute: typeof AuthenticatedRunsIdRouteWithChildren
+  AuthenticatedRunsNewRoute: typeof AuthenticatedRunsNewRoute
+  AuthenticatedSeedConversationsIdRoute: typeof AuthenticatedSeedConversationsIdRoute
+  AuthenticatedTestCasesIdRoute: typeof AuthenticatedTestCasesIdRoute
+  AuthenticatedJudgePromptsIndexRoute: typeof AuthenticatedJudgePromptsIndexRoute
+  AuthenticatedLeadPromptsIndexRoute: typeof AuthenticatedLeadPromptsIndexRoute
+  AuthenticatedPersonasIndexRoute: typeof AuthenticatedPersonasIndexRoute
+  AuthenticatedPromptsIndexRoute: typeof AuthenticatedPromptsIndexRoute
+  AuthenticatedRunsIndexRoute: typeof AuthenticatedRunsIndexRoute
+  AuthenticatedSeedConversationsIndexRoute: typeof AuthenticatedSeedConversationsIndexRoute
+  AuthenticatedTestCasesIndexRoute: typeof AuthenticatedTestCasesIndexRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedJudgePromptsIdRoute: AuthenticatedJudgePromptsIdRoute,
+  AuthenticatedLeadPromptsIdRoute: AuthenticatedLeadPromptsIdRoute,
+  AuthenticatedPersonasIdRoute: AuthenticatedPersonasIdRoute,
+  AuthenticatedPromptsIdRoute: AuthenticatedPromptsIdRoute,
+  AuthenticatedRunsIdRoute: AuthenticatedRunsIdRouteWithChildren,
+  AuthenticatedRunsNewRoute: AuthenticatedRunsNewRoute,
+  AuthenticatedSeedConversationsIdRoute: AuthenticatedSeedConversationsIdRoute,
+  AuthenticatedTestCasesIdRoute: AuthenticatedTestCasesIdRoute,
+  AuthenticatedJudgePromptsIndexRoute: AuthenticatedJudgePromptsIndexRoute,
+  AuthenticatedLeadPromptsIndexRoute: AuthenticatedLeadPromptsIndexRoute,
+  AuthenticatedPersonasIndexRoute: AuthenticatedPersonasIndexRoute,
+  AuthenticatedPromptsIndexRoute: AuthenticatedPromptsIndexRoute,
+  AuthenticatedRunsIndexRoute: AuthenticatedRunsIndexRoute,
+  AuthenticatedSeedConversationsIndexRoute:
+    AuthenticatedSeedConversationsIndexRoute,
+  AuthenticatedTestCasesIndexRoute: AuthenticatedTestCasesIndexRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
