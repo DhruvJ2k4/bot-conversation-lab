@@ -16,6 +16,7 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedTestCasesIndexRouteImport } from './routes/_authenticated.test-cases.index'
 import { Route as AuthenticatedPersonasIndexRouteImport } from './routes/_authenticated.personas.index'
 import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_authenticated.lead-prompts.index'
+import { Route as AuthenticatedTestCasesIdRouteImport } from './routes/_authenticated.test-cases.$id'
 import { Route as AuthenticatedPersonasIdRouteImport } from './routes/_authenticated.personas.$id'
 import { Route as AuthenticatedLeadPromptsIdRouteImport } from './routes/_authenticated.lead-prompts.$id'
 
@@ -56,6 +57,12 @@ const AuthenticatedLeadPromptsIndexRoute =
     path: '/lead-prompts/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedTestCasesIdRoute =
+  AuthenticatedTestCasesIdRouteImport.update({
+    id: '/test-cases/$id',
+    path: '/test-cases/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedPersonasIdRoute = AuthenticatedPersonasIdRouteImport.update({
   id: '/personas/$id',
   path: '/personas/$id',
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas/': typeof AuthenticatedPersonasIndexRoute
   '/test-cases/': typeof AuthenticatedTestCasesIndexRoute
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/lead-prompts': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas': typeof AuthenticatedPersonasIndexRoute
   '/test-cases': typeof AuthenticatedTestCasesIndexRoute
@@ -96,6 +105,7 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/_authenticated/personas/$id': typeof AuthenticatedPersonasIdRoute
+  '/_authenticated/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/_authenticated/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/_authenticated/personas/': typeof AuthenticatedPersonasIndexRoute
   '/_authenticated/test-cases/': typeof AuthenticatedTestCasesIndexRoute
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/lead-prompts/$id'
     | '/personas/$id'
+    | '/test-cases/$id'
     | '/lead-prompts/'
     | '/personas/'
     | '/test-cases/'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/lead-prompts/$id'
     | '/personas/$id'
+    | '/test-cases/$id'
     | '/lead-prompts'
     | '/personas'
     | '/test-cases'
@@ -129,6 +141,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/lead-prompts/$id'
     | '/_authenticated/personas/$id'
+    | '/_authenticated/test-cases/$id'
     | '/_authenticated/lead-prompts/'
     | '/_authenticated/personas/'
     | '/_authenticated/test-cases/'
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLeadPromptsIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/test-cases/$id': {
+      id: '/_authenticated/test-cases/$id'
+      path: '/test-cases/$id'
+      fullPath: '/test-cases/$id'
+      preLoaderRoute: typeof AuthenticatedTestCasesIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/personas/$id': {
       id: '/_authenticated/personas/$id'
       path: '/personas/$id'
@@ -212,6 +232,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedLeadPromptsIdRoute: typeof AuthenticatedLeadPromptsIdRoute
   AuthenticatedPersonasIdRoute: typeof AuthenticatedPersonasIdRoute
+  AuthenticatedTestCasesIdRoute: typeof AuthenticatedTestCasesIdRoute
   AuthenticatedLeadPromptsIndexRoute: typeof AuthenticatedLeadPromptsIndexRoute
   AuthenticatedPersonasIndexRoute: typeof AuthenticatedPersonasIndexRoute
   AuthenticatedTestCasesIndexRoute: typeof AuthenticatedTestCasesIndexRoute
@@ -221,6 +242,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedLeadPromptsIdRoute: AuthenticatedLeadPromptsIdRoute,
   AuthenticatedPersonasIdRoute: AuthenticatedPersonasIdRoute,
+  AuthenticatedTestCasesIdRoute: AuthenticatedTestCasesIdRoute,
   AuthenticatedLeadPromptsIndexRoute: AuthenticatedLeadPromptsIndexRoute,
   AuthenticatedPersonasIndexRoute: AuthenticatedPersonasIndexRoute,
   AuthenticatedTestCasesIndexRoute: AuthenticatedTestCasesIndexRoute,
