@@ -40,7 +40,7 @@ function Edit() {
     try { parsedAttrs = JSON.parse(attrs); } catch { toast.error("Attributes must be valid JSON"); return; }
     const { error } = await supabase
       .from("personas")
-      .update({ name, description, overlay_text: overlay, attributes: parsedAttrs, updated_at: new Date().toISOString() })
+      .update({ name, description, overlay_text: overlay, attributes: parsedAttrs as never, updated_at: new Date().toISOString() })
       .eq("id", id);
     if (error) toast.error(error.message);
     else { toast.success("Saved"); nav({ to: "/personas" }); }
