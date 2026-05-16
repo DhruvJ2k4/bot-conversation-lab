@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated.settings'
+import { Route as AuthenticatedPersonasIndexRouteImport } from './routes/_authenticated.personas.index'
 import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_authenticated.lead-prompts.index'
 import { Route as AuthenticatedLeadPromptsIdRouteImport } from './routes/_authenticated.lead-prompts.$id'
 
@@ -35,6 +36,12 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPersonasIndexRoute =
+  AuthenticatedPersonasIndexRouteImport.update({
+    id: '/personas/',
+    path: '/personas/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedLeadPromptsIndexRoute =
   AuthenticatedLeadPromptsIndexRouteImport.update({
     id: '/lead-prompts/',
@@ -54,6 +61,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
+  '/personas/': typeof AuthenticatedPersonasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,6 +69,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/lead-prompts': typeof AuthenticatedLeadPromptsIndexRoute
+  '/personas': typeof AuthenticatedPersonasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,6 +79,7 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/_authenticated/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
+  '/_authenticated/personas/': typeof AuthenticatedPersonasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -79,8 +89,15 @@ export interface FileRouteTypes {
     | '/settings'
     | '/lead-prompts/$id'
     | '/lead-prompts/'
+    | '/personas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/settings' | '/lead-prompts/$id' | '/lead-prompts'
+  to:
+    | '/'
+    | '/login'
+    | '/settings'
+    | '/lead-prompts/$id'
+    | '/lead-prompts'
+    | '/personas'
   id:
     | '__root__'
     | '/'
@@ -89,6 +106,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/lead-prompts/$id'
     | '/_authenticated/lead-prompts/'
+    | '/_authenticated/personas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -127,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/personas/': {
+      id: '/_authenticated/personas/'
+      path: '/personas'
+      fullPath: '/personas/'
+      preLoaderRoute: typeof AuthenticatedPersonasIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/lead-prompts/': {
       id: '/_authenticated/lead-prompts/'
       path: '/lead-prompts'
@@ -148,12 +173,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedLeadPromptsIdRoute: typeof AuthenticatedLeadPromptsIdRoute
   AuthenticatedLeadPromptsIndexRoute: typeof AuthenticatedLeadPromptsIndexRoute
+  AuthenticatedPersonasIndexRoute: typeof AuthenticatedPersonasIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedLeadPromptsIdRoute: AuthenticatedLeadPromptsIdRoute,
   AuthenticatedLeadPromptsIndexRoute: AuthenticatedLeadPromptsIndexRoute,
+  AuthenticatedPersonasIndexRoute: AuthenticatedPersonasIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
