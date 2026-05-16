@@ -22,6 +22,7 @@ import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_aut
 import { Route as AuthenticatedJudgePromptsIndexRouteImport } from './routes/_authenticated.judge-prompts.index'
 import { Route as AuthenticatedTestCasesIdRouteImport } from './routes/_authenticated.test-cases.$id'
 import { Route as AuthenticatedSeedConversationsIdRouteImport } from './routes/_authenticated.seed-conversations.$id'
+import { Route as AuthenticatedRunsNewRouteImport } from './routes/_authenticated.runs.new'
 import { Route as AuthenticatedPromptsIdRouteImport } from './routes/_authenticated.prompts.$id'
 import { Route as AuthenticatedPersonasIdRouteImport } from './routes/_authenticated.personas.$id'
 import { Route as AuthenticatedLeadPromptsIdRouteImport } from './routes/_authenticated.lead-prompts.$id'
@@ -99,6 +100,11 @@ const AuthenticatedSeedConversationsIdRoute =
     path: '/seed-conversations/$id',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedRunsNewRoute = AuthenticatedRunsNewRouteImport.update({
+  id: '/runs/new',
+  path: '/runs/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedPromptsIdRoute = AuthenticatedPromptsIdRouteImport.update({
   id: '/prompts/$id',
   path: '/prompts/$id',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/runs/new': typeof AuthenticatedRunsNewRoute
   '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
   '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/judge-prompts/': typeof AuthenticatedJudgePromptsIndexRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/runs/new': typeof AuthenticatedRunsNewRoute
   '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
   '/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/judge-prompts': typeof AuthenticatedJudgePromptsIndexRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/_authenticated/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/_authenticated/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/_authenticated/prompts/$id': typeof AuthenticatedPromptsIdRoute
+  '/_authenticated/runs/new': typeof AuthenticatedRunsNewRoute
   '/_authenticated/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
   '/_authenticated/test-cases/$id': typeof AuthenticatedTestCasesIdRoute
   '/_authenticated/judge-prompts/': typeof AuthenticatedJudgePromptsIndexRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/lead-prompts/$id'
     | '/personas/$id'
     | '/prompts/$id'
+    | '/runs/new'
     | '/seed-conversations/$id'
     | '/test-cases/$id'
     | '/judge-prompts/'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/lead-prompts/$id'
     | '/personas/$id'
     | '/prompts/$id'
+    | '/runs/new'
     | '/seed-conversations/$id'
     | '/test-cases/$id'
     | '/judge-prompts'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/_authenticated/lead-prompts/$id'
     | '/_authenticated/personas/$id'
     | '/_authenticated/prompts/$id'
+    | '/_authenticated/runs/new'
     | '/_authenticated/seed-conversations/$id'
     | '/_authenticated/test-cases/$id'
     | '/_authenticated/judge-prompts/'
@@ -335,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSeedConversationsIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/runs/new': {
+      id: '/_authenticated/runs/new'
+      path: '/runs/new'
+      fullPath: '/runs/new'
+      preLoaderRoute: typeof AuthenticatedRunsNewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/prompts/$id': {
       id: '/_authenticated/prompts/$id'
       path: '/prompts/$id'
@@ -372,6 +391,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedLeadPromptsIdRoute: typeof AuthenticatedLeadPromptsIdRoute
   AuthenticatedPersonasIdRoute: typeof AuthenticatedPersonasIdRoute
   AuthenticatedPromptsIdRoute: typeof AuthenticatedPromptsIdRoute
+  AuthenticatedRunsNewRoute: typeof AuthenticatedRunsNewRoute
   AuthenticatedSeedConversationsIdRoute: typeof AuthenticatedSeedConversationsIdRoute
   AuthenticatedTestCasesIdRoute: typeof AuthenticatedTestCasesIdRoute
   AuthenticatedJudgePromptsIndexRoute: typeof AuthenticatedJudgePromptsIndexRoute
@@ -389,6 +409,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedLeadPromptsIdRoute: AuthenticatedLeadPromptsIdRoute,
   AuthenticatedPersonasIdRoute: AuthenticatedPersonasIdRoute,
   AuthenticatedPromptsIdRoute: AuthenticatedPromptsIdRoute,
+  AuthenticatedRunsNewRoute: AuthenticatedRunsNewRoute,
   AuthenticatedSeedConversationsIdRoute: AuthenticatedSeedConversationsIdRoute,
   AuthenticatedTestCasesIdRoute: AuthenticatedTestCasesIdRoute,
   AuthenticatedJudgePromptsIndexRoute: AuthenticatedJudgePromptsIndexRoute,
