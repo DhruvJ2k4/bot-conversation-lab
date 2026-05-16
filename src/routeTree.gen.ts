@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated.settings'
+import { Route as AuthenticatedTestCasesIndexRouteImport } from './routes/_authenticated.test-cases.index'
 import { Route as AuthenticatedPersonasIndexRouteImport } from './routes/_authenticated.personas.index'
 import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_authenticated.lead-prompts.index'
 import { Route as AuthenticatedPersonasIdRouteImport } from './routes/_authenticated.personas.$id'
@@ -37,6 +38,12 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedTestCasesIndexRoute =
+  AuthenticatedTestCasesIndexRouteImport.update({
+    id: '/test-cases/',
+    path: '/test-cases/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedPersonasIndexRoute =
   AuthenticatedPersonasIndexRouteImport.update({
     id: '/personas/',
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas/': typeof AuthenticatedPersonasIndexRoute
+  '/test-cases/': typeof AuthenticatedTestCasesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +86,7 @@ export interface FileRoutesByTo {
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/lead-prompts': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas': typeof AuthenticatedPersonasIndexRoute
+  '/test-cases': typeof AuthenticatedTestCasesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/_authenticated/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/_authenticated/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/_authenticated/personas/': typeof AuthenticatedPersonasIndexRoute
+  '/_authenticated/test-cases/': typeof AuthenticatedTestCasesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/personas/$id'
     | '/lead-prompts/'
     | '/personas/'
+    | '/test-cases/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/personas/$id'
     | '/lead-prompts'
     | '/personas'
+    | '/test-cases'
   id:
     | '__root__'
     | '/'
@@ -119,6 +131,7 @@ export interface FileRouteTypes {
     | '/_authenticated/personas/$id'
     | '/_authenticated/lead-prompts/'
     | '/_authenticated/personas/'
+    | '/_authenticated/test-cases/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/test-cases/': {
+      id: '/_authenticated/test-cases/'
+      path: '/test-cases'
+      fullPath: '/test-cases/'
+      preLoaderRoute: typeof AuthenticatedTestCasesIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/personas/': {
@@ -194,6 +214,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedPersonasIdRoute: typeof AuthenticatedPersonasIdRoute
   AuthenticatedLeadPromptsIndexRoute: typeof AuthenticatedLeadPromptsIndexRoute
   AuthenticatedPersonasIndexRoute: typeof AuthenticatedPersonasIndexRoute
+  AuthenticatedTestCasesIndexRoute: typeof AuthenticatedTestCasesIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -202,6 +223,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedPersonasIdRoute: AuthenticatedPersonasIdRoute,
   AuthenticatedLeadPromptsIndexRoute: AuthenticatedLeadPromptsIndexRoute,
   AuthenticatedPersonasIndexRoute: AuthenticatedPersonasIndexRoute,
+  AuthenticatedTestCasesIndexRoute: AuthenticatedTestCasesIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -216,3 +238,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
