@@ -22,6 +22,7 @@ import { Route as AuthenticatedTestCasesIdRouteImport } from './routes/_authenti
 import { Route as AuthenticatedSeedConversationsIdRouteImport } from './routes/_authenticated.seed-conversations.$id'
 import { Route as AuthenticatedPersonasIdRouteImport } from './routes/_authenticated.personas.$id'
 import { Route as AuthenticatedLeadPromptsIdRouteImport } from './routes/_authenticated.lead-prompts.$id'
+import { Route as AuthenticatedJudgePromptsIdRouteImport } from './routes/_authenticated.judge-prompts.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -95,11 +96,18 @@ const AuthenticatedLeadPromptsIdRoute =
     path: '/lead-prompts/$id',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedJudgePromptsIdRoute =
+  AuthenticatedJudgePromptsIdRouteImport.update({
+    id: '/judge-prompts/$id',
+    path: '/judge-prompts/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
   '/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
@@ -130,6 +139,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/judge-prompts/$id': typeof AuthenticatedJudgePromptsIdRoute
   '/_authenticated/lead-prompts/$id': typeof AuthenticatedLeadPromptsIdRoute
   '/_authenticated/personas/$id': typeof AuthenticatedPersonasIdRoute
   '/_authenticated/seed-conversations/$id': typeof AuthenticatedSeedConversationsIdRoute
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/settings'
+    | '/judge-prompts/$id'
     | '/lead-prompts/$id'
     | '/personas/$id'
     | '/seed-conversations/$id'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/settings'
+    | '/judge-prompts/$id'
     | '/lead-prompts/$id'
     | '/personas/$id'
     | '/seed-conversations/$id'
@@ -175,6 +187,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/login'
     | '/_authenticated/settings'
+    | '/_authenticated/judge-prompts/$id'
     | '/_authenticated/lead-prompts/$id'
     | '/_authenticated/personas/$id'
     | '/_authenticated/seed-conversations/$id'
@@ -285,11 +298,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLeadPromptsIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/judge-prompts/$id': {
+      id: '/_authenticated/judge-prompts/$id'
+      path: '/judge-prompts/$id'
+      fullPath: '/judge-prompts/$id'
+      preLoaderRoute: typeof AuthenticatedJudgePromptsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedJudgePromptsIdRoute: typeof AuthenticatedJudgePromptsIdRoute
   AuthenticatedLeadPromptsIdRoute: typeof AuthenticatedLeadPromptsIdRoute
   AuthenticatedPersonasIdRoute: typeof AuthenticatedPersonasIdRoute
   AuthenticatedSeedConversationsIdRoute: typeof AuthenticatedSeedConversationsIdRoute
@@ -303,6 +324,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedJudgePromptsIdRoute: AuthenticatedJudgePromptsIdRoute,
   AuthenticatedLeadPromptsIdRoute: AuthenticatedLeadPromptsIdRoute,
   AuthenticatedPersonasIdRoute: AuthenticatedPersonasIdRoute,
   AuthenticatedSeedConversationsIdRoute: AuthenticatedSeedConversationsIdRoute,
