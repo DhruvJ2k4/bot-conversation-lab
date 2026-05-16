@@ -36,7 +36,7 @@ function Edit() {
   }, [data]);
 
   async function save() {
-    let parsedAttrs: unknown = {};
+    let parsedAttrs: Record<string, unknown> = {};
     try { parsedAttrs = JSON.parse(attrs); } catch { toast.error("Attributes must be valid JSON"); return; }
     const { error } = await supabase
       .from("personas")
