@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated.settings'
 import { Route as AuthenticatedTestCasesIndexRouteImport } from './routes/_authenticated.test-cases.index'
 import { Route as AuthenticatedSeedConversationsIndexRouteImport } from './routes/_authenticated.seed-conversations.index'
+import { Route as AuthenticatedRunsIndexRouteImport } from './routes/_authenticated.runs.index'
 import { Route as AuthenticatedPromptsIndexRouteImport } from './routes/_authenticated.prompts.index'
 import { Route as AuthenticatedPersonasIndexRouteImport } from './routes/_authenticated.personas.index'
 import { Route as AuthenticatedLeadPromptsIndexRouteImport } from './routes/_authenticated.lead-prompts.index'
@@ -57,6 +58,11 @@ const AuthenticatedSeedConversationsIndexRoute =
     path: '/seed-conversations/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedRunsIndexRoute = AuthenticatedRunsIndexRouteImport.update({
+  id: '/runs/',
+  path: '/runs/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedPromptsIndexRoute =
   AuthenticatedPromptsIndexRouteImport.update({
     id: '/prompts/',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas/': typeof AuthenticatedPersonasIndexRoute
   '/prompts/': typeof AuthenticatedPromptsIndexRoute
+  '/runs/': typeof AuthenticatedRunsIndexRoute
   '/seed-conversations/': typeof AuthenticatedSeedConversationsIndexRoute
   '/test-cases/': typeof AuthenticatedTestCasesIndexRoute
 }
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/lead-prompts': typeof AuthenticatedLeadPromptsIndexRoute
   '/personas': typeof AuthenticatedPersonasIndexRoute
   '/prompts': typeof AuthenticatedPromptsIndexRoute
+  '/runs': typeof AuthenticatedRunsIndexRoute
   '/seed-conversations': typeof AuthenticatedSeedConversationsIndexRoute
   '/test-cases': typeof AuthenticatedTestCasesIndexRoute
 }
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/_authenticated/lead-prompts/': typeof AuthenticatedLeadPromptsIndexRoute
   '/_authenticated/personas/': typeof AuthenticatedPersonasIndexRoute
   '/_authenticated/prompts/': typeof AuthenticatedPromptsIndexRoute
+  '/_authenticated/runs/': typeof AuthenticatedRunsIndexRoute
   '/_authenticated/seed-conversations/': typeof AuthenticatedSeedConversationsIndexRoute
   '/_authenticated/test-cases/': typeof AuthenticatedTestCasesIndexRoute
 }
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/lead-prompts/'
     | '/personas/'
     | '/prompts/'
+    | '/runs/'
     | '/seed-conversations/'
     | '/test-cases/'
   fileRoutesByTo: FileRoutesByTo
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/lead-prompts'
     | '/personas'
     | '/prompts'
+    | '/runs'
     | '/seed-conversations'
     | '/test-cases'
   id:
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/_authenticated/lead-prompts/'
     | '/_authenticated/personas/'
     | '/_authenticated/prompts/'
+    | '/_authenticated/runs/'
     | '/_authenticated/seed-conversations/'
     | '/_authenticated/test-cases/'
   fileRoutesById: FileRoutesById
@@ -272,6 +284,13 @@ declare module '@tanstack/react-router' {
       path: '/seed-conversations'
       fullPath: '/seed-conversations/'
       preLoaderRoute: typeof AuthenticatedSeedConversationsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/runs/': {
+      id: '/_authenticated/runs/'
+      path: '/runs'
+      fullPath: '/runs/'
+      preLoaderRoute: typeof AuthenticatedRunsIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/prompts/': {
@@ -359,6 +378,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedLeadPromptsIndexRoute: typeof AuthenticatedLeadPromptsIndexRoute
   AuthenticatedPersonasIndexRoute: typeof AuthenticatedPersonasIndexRoute
   AuthenticatedPromptsIndexRoute: typeof AuthenticatedPromptsIndexRoute
+  AuthenticatedRunsIndexRoute: typeof AuthenticatedRunsIndexRoute
   AuthenticatedSeedConversationsIndexRoute: typeof AuthenticatedSeedConversationsIndexRoute
   AuthenticatedTestCasesIndexRoute: typeof AuthenticatedTestCasesIndexRoute
 }
@@ -375,6 +395,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedLeadPromptsIndexRoute: AuthenticatedLeadPromptsIndexRoute,
   AuthenticatedPersonasIndexRoute: AuthenticatedPersonasIndexRoute,
   AuthenticatedPromptsIndexRoute: AuthenticatedPromptsIndexRoute,
+  AuthenticatedRunsIndexRoute: AuthenticatedRunsIndexRoute,
   AuthenticatedSeedConversationsIndexRoute:
     AuthenticatedSeedConversationsIndexRoute,
   AuthenticatedTestCasesIndexRoute: AuthenticatedTestCasesIndexRoute,
